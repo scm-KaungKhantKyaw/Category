@@ -20,7 +20,7 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="/create">Create</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
@@ -39,5 +39,60 @@
     </div>
   </div>
 </nav>
+
+<div class="container mt-5">
+
+    <section class="row justify-content-end">
+        <div class="col-5">
+            <form>
+                <div class="input-group mb-3">
+                    <input type="text" name="search" value="{{ request('search') }}" class="form-control" placeholder="Search...">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                          </svg>
+                    </button>
+                  </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="row">
+        <div class="col-12">
+            {{-- @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif --}}
+            @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session()->get('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            @if (count($universities) > 0)
+                @foreach ($universities as $uni)
+                <div>
+                    <h3>
+                        <a href="#">{{ $uni->name }}</a>
+                    </h3>
+                    <p>{{ $uni->about }}</p> 
+                </div>
+                <hr>
+                @endforeach
+            @else
+                No post.
+            @endif
+            
+
+            {{ $universities->links() }}
+        </div>
+    </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 </html>
