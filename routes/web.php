@@ -18,4 +18,4 @@ use App\Http\Controllers\ListController;
 
 Route::get('/', [ListController::class, 'index'])->name('index');
 Route::get('/create', [ListController::class, 'generate']);
-Route::post('/create', [ListController::class, 'create']);
+Route::post('/', [ListController::class, 'create']);

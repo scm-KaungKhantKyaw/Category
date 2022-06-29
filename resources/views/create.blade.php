@@ -8,32 +8,16 @@
     <title>Document</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-light mb-5">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
       </ul>
     </div>
@@ -54,7 +38,7 @@
         </ul>
         @endif --}}
 
-        <form action="/create" method="POST">
+        <form action="/" method="POST">
             @csrf
 
             <div class="mb-3">
@@ -72,7 +56,7 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="dropdown mb-5">
+            <div class="dropdown form-control @error('category') is-invalid @enderror" style="width: fit-content; padding:1px;">
               <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 Categories
               </a>
@@ -80,38 +64,41 @@
               <ul class="dropdown-menu ps-5" aria-labelledby="dropdownMenuLink">
               <li>
                   <div>
-                    <input class="form-check-input" type="checkbox" name="civil" value="1" >
-                    <label class="form-check-label">Civil</label>
+                    <input class="form-check-input" type="checkbox" id="civil" name="civil" value="1" >
+                    <label class="form-check-label" for="civil">Civil</label>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input class="form-check-input" type="checkbox" name="electrical" value="2" >
-                    <label class="form-check-label">Electrical</label>
+                    <input class="form-check-input" type="checkbox" id="electrical" name="electrical" value="2" >
+                    <label class="form-check-label" for="electrical">Electrical</label>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input class="form-check-input" type="checkbox" name="mechnical" value="3" >
-                    <label class="form-check-label">Mechnical</label>
+                    <input class="form-check-input" type="checkbox" id="mechnical" name="mechnical" value="3" >
+                    <label class="form-check-label" for="mechnical">Mechnical</label>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input class="form-check-input" type="checkbox" name="electronic" value="4" >
-                    <label class="form-check-label">Electronic</label>
+                    <input class="form-check-input" type="checkbox" id="electronic" name="electronic" value="4" >
+                    <label class="form-check-label" for="electronic">Electronic</label>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input class="form-check-input" type="checkbox" name="computerscience" value="5" >
-                    <label class="form-check-label">ComputerScience</label>
+                    <input class="form-check-input" type="checkbox" id="computerscience" name="computerscience" value="5" >
+                    <label class="form-check-label" for="computerscience">ComputerScience</label>
                   </div>
                 </li>
               </ul>
             </div>
+            @error('category')
+              <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
 
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between mt-4">
                 <button type="submit" class="btn btn-outline-primary">Publish</button>
                 <a href="/" class="btn btn-outline-secondary">Back</a>
             </div>

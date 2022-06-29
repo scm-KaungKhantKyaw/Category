@@ -10,30 +10,17 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/create">Create</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
         </li>
       </ul>
     </div>
@@ -41,21 +28,6 @@
 </nav>
 
 <div class="container mt-5">
-
-    <section class="row justify-content-end">
-        <div class="col-5">
-            <form>
-                <div class="input-group mb-3">
-                    <input type="text" name="search" value="{{ request('search') }}" class="form-control" placeholder="Search...">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                          </svg>
-                    </button>
-                  </div>
-            </form>
-        </div>
-    </section>
 
     <section class="row">
         <div class="col-12">
@@ -71,25 +43,45 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-
+              <div>
+                <ul>
             @if (count($universities) > 0)
                 @foreach ($universities as $uni)
-                <div>
-                    <h3>
+                @if($uni->name != $name)
+
+                  </ul>
+                </div>
+                @endif
+                @if($uni->name != $name)
+                <div class="border rounded p-3 mb-3">
+                    <h3 class="text-center">
                         <a href="#">{{ $uni->name }}</a>
                     </h3>
-                    <p>{{ $uni->about }}</p> 
-                </div>
-                <hr>
+                    <p class="text-center">{{ $uni->about }}</p> <br>
+                    <ul style=" list-style-type: square; padding: 0px;">
+                    <h5> Categories</h5>
+                    <hr class="mx-5">
+                      <li class="pe-2 me-3" style="display: inline-block;">
+                        <p class="m-0">{{ $uni->category }}</p>
+                      </li>
+                @endif
+                @if($uni->name == $name)
+                  <li class="pe-2 me-3" style="display: inline-block;">
+                    <p class="m-0" >{{ $uni->category }}</p>
+                  </li>
+                @endif
+                <?php $name=$uni->name; ?>
                 @endforeach
             @else
                 No post.
             @endif
             
+    </section>
 
+        <div style="margin: 40px;"></div>
             {{ $universities->links() }}
         </div>
-    </section>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
